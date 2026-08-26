@@ -1,0 +1,29 @@
+generated: '2026-08-25'
+method: probed
+source: >-
+  Live response-header inspection of meowwolf.com, tickets.meowwolf.com and
+  shop.meowwolf.com on 2026-08-25; documentation search for a published limits page.
+limit_count: 0
+note: >-
+  No rate limits are published, because there is no public API to limit. No developer
+  documentation exists in which limits could be stated, and live unauthenticated
+  responses from every Meow Wolf host carry no rate-limit signal — no X-RateLimit-*,
+  no RFC 9331 RateLimit-*, no Retry-After. The only throttling in the path is Cloudflare
+  edge protection fronting all four www-facing hosts, which is infrastructure policy
+  rather than a documented API contract, and which exposes no headers an agent could
+  read to back off politely.
+rate_limits: []
+response_headers_observed: []
+exhaustion_status_code: null
+evidence:
+- url: https://meowwolf.com/
+  status: 200
+  detail: No rate-limit headers present on the response.
+- url: https://shop.meowwolf.com/wp-json/
+  status: 200
+  detail: >-
+    The one live machine-readable surface found (stock WordPress REST index). Returns no
+    rate-limit headers; WordPress core publishes none by default.
+- url: https://tickets.meowwolf.com/
+  status: 200
+  detail: "Cloudflare-fronted (server header: cloudflare); no rate-limit headers exposed."

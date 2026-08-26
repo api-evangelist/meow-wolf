@@ -1,0 +1,157 @@
+generated: '2026-08-25'
+method: probed
+source: >-
+  Live probes of meowwolf.com, tickets.meowwolf.com, shop.meowwolf.com,
+  credits.meowwolf.com and api.meowwolf.com on 2026-08-25.
+note: >-
+  Meow Wolf publishes no API contract, so there is no spec to assert contract-level
+  conformance against. What can be asserted is the set of web-standard documents the
+  company does serve — including a full OIDC/OAuth 2.0 discovery surface on its own
+  identity host that is nowhere documented — and the standards it demonstrably does NOT
+  serve. Domain
+  standards were considered and none apply as a reward: the immersive-attractions /
+  live-events sector has no adopted machine-readable interchange standard that Meow Wolf
+  could conform to, so `domain_standard_conformance` is genuinely not-applicable here
+  rather than failed.
+standards:
+- id: rfc9116
+  name: security.txt
+  conforms: true
+  evidence:
+    url: https://meowwolf.com/.well-known/security.txt
+    status: 200
+    detail: >-
+      Valid RFC 9116 document with two Contact: fields (privacy@ and infosec@meowwolf.com)
+      and an Expires: field set to 2027-01-22T00:00:00Z. Served identically from
+      meowwolf.com, tickets.meowwolf.com, shop.meowwolf.com and credits.meowwolf.com.
+      Missing the optional Encryption:, Preferred-Languages: and Policy: fields.
+- id: llms-txt
+  name: llms.txt
+  conforms: true
+  evidence:
+    url: https://meowwolf.com/llms.txt
+    status: 200
+    detail: >-
+      Well-formed llms.txt — H1 title, a summary paragraph, and sectioned link lists with
+      one-line descriptions for locations, shop, foundation, education, app, comics,
+      press, privacy and terms. It is a visitor-facing site map for agents; it names no
+      API and no developer resource.
+- id: robots-ai-directives
+  name: robots.txt AI-crawler directives
+  conforms: true
+  evidence:
+    url: https://meowwolf.com/robots.txt
+    status: 200
+    detail: >-
+      Names GPTBot, Google-Extended, ClaudeBot, PerplexityBot, CCBot and Amazonbot as
+      individual user-agents and disallows only /cdn.prod/ for each — an explicit,
+      permissive AI-crawler policy consistent with the served llms.txt.
+- id: wordpress-rest
+  name: WordPress REST API (wp/v2) + WooCommerce Store API
+  conforms: true
+  evidence:
+    url: https://shop.meowwolf.com/wp-json/
+    status: 200
+    detail: >-
+      The merchandise shop runs WordPress + WooCommerce and serves the standard WP REST
+      discovery index — 1,160 routes across 43 namespaces (wp/v2, wc/v3, wc/store/v1,
+      jetpack/v4, yoast/v1 and others), self-identifying as name "Meow Wolf",
+      description "Meow Wolf Shop". wp/v2 reads are anonymous (wp/v2/types returns 200);
+      wc/v3 is key-gated (401 woocommerce_rest_cannot_view). This is platform-standard
+      surface that ships with the CMS, NOT a Meow Wolf developer program — it is
+      undocumented by the company, unadvertised, and no OpenAPI is published for it.
+      Recorded as an observed conformance, not as a Meow Wolf API product.
+- id: oauth2
+  name: OAuth 2.0 Authorization Server Metadata (RFC 8414)
+  conforms: true
+  evidence:
+    url: https://auth.meowwolf.com/.well-known/oauth-authorization-server
+    status: 200
+    detail: >-
+      Complete RFC 8414 metadata document, anonymous, byte-identical to the OIDC
+      discovery document. Declares authorization_code, client_credentials, refresh_token,
+      device_code, token-exchange and jwt-bearer grants, PKCE (S256 and plain) and DPoP
+      (ES256). Not served on any www-facing host — only on the identity host.
+  deviations:
+  - implicit grant still enabled (deprecated by OAuth 2.1)
+  - password (ROPC) grant still enabled (deprecated by OAuth 2.1)
+  - code_challenge_methods_supported includes "plain" as well as S256
+- id: oidc
+  name: OpenID Connect Discovery 1.0
+  conforms: true
+  evidence:
+    url: https://auth.meowwolf.com/.well-known/openid-configuration
+    status: 200
+    detail: >-
+      Full discovery document from an Auth0 custom-domain tenant on Meow Wolf's own
+      domain (issuer https://auth.meowwolf.com/). All required fields present: issuer,
+      authorization_endpoint, token_endpoint, userinfo_endpoint, jwks_uri,
+      response_types_supported, subject_types_supported, id_token_signing_alg_values_supported.
+      Live JWKS with 2 RS256 signing keys. Back-channel logout supported. Reached only by
+      following meowwolf.com/sign-in — never linked or documented as an API.
+- id: rfc7636-pkce
+  name: PKCE (RFC 7636)
+  conforms: true
+  evidence:
+    url: https://auth.meowwolf.com/.well-known/openid-configuration
+    status: 200
+    detail: code_challenge_methods_supported = [S256, plain].
+- id: rfc9449-dpop
+  name: DPoP (RFC 9449)
+  conforms: true
+  evidence:
+    url: https://auth.meowwolf.com/.well-known/openid-configuration
+    status: 200
+    detail: dpop_signing_alg_values_supported = [ES256].
+- id: rfc7591-dcr
+  name: OAuth 2.0 Dynamic Client Registration (RFC 7591)
+  conforms: true
+  evidence:
+    url: https://auth.meowwolf.com/.well-known/openid-configuration
+    status: 200
+    detail: >-
+      registration_endpoint = https://auth.meowwolf.com/oidc/register. Advertised but
+      entirely undocumented by the company.
+- id: rfc9457
+  name: RFC 9457 Problem Details
+  conforms: false
+  evidence:
+    url: https://shop.meowwolf.com/wp-json/wc/v3/products
+    status: 401
+    detail: >-
+      The only observable error envelope is WordPress's own {code, message, data.status}
+      shape, not application/problem+json.
+- id: a2a
+  name: A2A Agent Card
+  conforms: false
+  evidence:
+    url: https://meowwolf.com/.well-known/agent-card.json
+    status: 404
+    detail: >-
+      Probed /.well-known/agent-card.json and the legacy /.well-known/agent.json on all
+      five hosts. No card. A control probe of a nonsense /.well-known/ path also 404s,
+      so these are real negatives and not a catch-all masking a hit.
+- id: mcp
+  name: Model Context Protocol
+  conforms: false
+  evidence:
+    url: https://meowwolf.com/.well-known/mcp.json
+    status: 404
+    detail: No MCP server advertised or discoverable on any Meow Wolf host.
+- id: api-catalog
+  name: RFC 9727 /.well-known/api-catalog
+  conforms: false
+  evidence:
+    url: https://meowwolf.com/.well-known/api-catalog
+    status: 404
+    detail: Not served on any host.
+domain_standard:
+  applicable: false
+  note: >-
+    No adopted machine-readable domain standard exists for the immersive-attractions /
+    location-based-entertainment market. Reward-only dimension; not scored against.
+compliance_certifications: []
+compliance_note: >-
+  No trust center, no certification page and no named SOC 2 / ISO 27001 / PCI / HIPAA
+  claim was found. trust.meowwolf.com does not resolve (NXDOMAIN) and
+  meowwolf.com/security returns 404. No `Compliance` pointer is emitted.

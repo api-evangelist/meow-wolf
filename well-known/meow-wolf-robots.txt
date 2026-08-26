@@ -1,0 +1,29 @@
+User-agent: GPTBot
+Disallow: /cdn.prod/
+
+User-agent: Google-Extended
+Disallow: /cdn.prod/
+
+User-agent: ClaudeBot
+Disallow: /cdn.prod/
+
+User-agent: PerplexityBot
+Disallow: /cdn.prod/
+
+User-agent: CCBot
+Disallow: /cdn.prod/
+
+User-agent: Amazonbot
+Disallow: /cdn.prod/
+
+User-agent: *
+Disallow: /galleries/
+Disallow: /coupon
+Disallow: /*?_hstc*
+Disallow: /*?fbclid*
+Disallow: /*?_hsenc*
+Disallow: /*?ltclid*
+
+Sitemap: https://shop.meowwolf.com/video_sitemap.xml
+
+Sitemap: https://meowwolf.com/sitemap.xml

@@ -1,0 +1,58 @@
+generated: '2026-08-25'
+method: probed
+source: https://auth.meowwolf.com/.well-known/openid-configuration
+docs: null
+note: >-
+  Meow Wolf publishes no scope or permission reference — there is no developer
+  documentation of any kind. Every scope below is read verbatim from scopes_supported in
+  the live OIDC discovery document served by the company's Auth0 custom-domain tenant.
+  They are the stock OpenID Connect identity scopes plus Auth0's per-claim scopes; NONE
+  of them grants access to a Meow Wolf business API, because no such API is published.
+  Descriptions are the standard OIDC Core 1.0 / Auth0 meanings, not vendor-authored text.
+scope_count: 14
+scopes:
+- name: openid
+  description: Required to obtain an ID token and use OpenID Connect at all.
+- name: profile
+  description: Requests the default profile claims (name, family_name, given_name, nickname, picture, updated_at).
+- name: offline_access
+  description: Requests a refresh token so the client can renew access without user interaction.
+- name: email
+  description: Requests the email claim.
+- name: email_verified
+  description: Requests the email_verified claim.
+- name: name
+  description: Requests the full name claim.
+- name: given_name
+  description: Requests the given name claim.
+- name: family_name
+  description: Requests the family name claim.
+- name: nickname
+  description: Requests the nickname claim.
+- name: picture
+  description: Requests the profile picture URL claim.
+- name: phone
+  description: Requests the phone_number claim.
+- name: address
+  description: Requests the address claim.
+- name: created_at
+  description: Auth0 claim — account creation timestamp.
+- name: identities
+  description: Auth0 claim — the linked identity-provider identities for the user.
+claims_supported:
+- aud
+- auth_time
+- created_at
+- email
+- email_verified
+- exp
+- family_name
+- given_name
+- iat
+- identities
+- iss
+- name
+- nickname
+- phone_number
+- picture
+- sub

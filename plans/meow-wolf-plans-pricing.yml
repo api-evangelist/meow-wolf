@@ -1,0 +1,27 @@
+generated: '2026-08-25'
+method: searched
+source: https://tickets.meowwolf.com/
+plan_count: 0
+note: >-
+  Meow Wolf publishes no API plans, no developer tiers and no usage-based pricing,
+  because it operates no public API. The only pricing the company publishes is consumer
+  admission — per-location timed-entry tickets, an Annual Portal Pass membership, gift
+  cards and merchandise — sold through tickets.meowwolf.com and shop.meowwolf.com. Those
+  are visitor products, not API plans, so they are deliberately NOT modelled as plans[]
+  here: doing so would misrepresent an attraction ticket as a developer tier. There is
+  also no "contact sales for API access" form to record as an enterprise-only tier;
+  the company simply has no API commercial surface at all.
+plans: []
+evidence:
+- url: https://tickets.meowwolf.com/
+  status: 200
+  detail: Consumer ticketing storefront; per-location admission and Annual Portal Pass.
+- url: https://shop.meowwolf.com/buy-gift-card/
+  status: 200
+  detail: Gift cards. Consumer commerce, not API billing.
+- url: https://api.meowwolf.com/
+  status: 404
+  detail: >-
+    CNAME to phs.getpostman.com (Postman Hosted Site). The custom domain is configured
+    but nothing is published on it — Postman's own "Not found" page is served. No
+    developer plan or key-issuance surface behind it.

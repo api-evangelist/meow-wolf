@@ -1,0 +1,149 @@
+generated: '2026-08-25'
+method: searched
+source: https://meowwolf.com/.well-known/security.txt
+note: >-
+  Probed the full /.well-known/ discovery surface on every Meow Wolf host resolved from
+  apis.yml and DNS. One real document is served, and it is served consistently on four
+  hosts: an RFC 9116 security.txt carrying two contact mailboxes and an Expires field.
+  Every other path 404s. A deliberate nonsense control path
+  (/.well-known/__ae_control_probe) 404s on all hosts, so none of these origins is a
+  catch-all that would answer 200 for anything — the negatives below are real negatives.
+  No agent card, no api-catalog, no ai-plugin.json on any www-facing host.
+  ONE further host was found only by following the sign-in flow: auth.meowwolf.com, an
+  Auth0 custom-domain tenant that serves a complete, anonymous OIDC discovery document,
+  a byte-identical RFC 8414 authorization-server document, and a live JWKS. It is the
+  only genuine machine-readable API contract Meow Wolf serves.
+hit_count: 7
+control_probe:
+  path: /.well-known/__ae_control_probe
+  result: 404 on every host — no soft-200 catch-all detected
+hosts:
+- host: https://auth.meowwolf.com
+  platform: Auth0 custom domain (CNAME meowwolf-cd-swbu1coxwcncnddi.edge.tenants.auth0.com)
+  note: >-
+    The only Meow Wolf host serving a real API discovery surface. Reached by following
+    https://meowwolf.com/sign-in, which redirects to tickets.meowwolf.com carrying
+    ?iss=https%3A%2F%2Fauth.meowwolf.com%2F — the OIDC issuer. Anonymous, fully
+    machine-readable, and self-identifying as issuer https://auth.meowwolf.com/.
+  documents:
+  - path: /.well-known/openid-configuration
+    status: 200
+    content_type: application/json; charset=utf-8
+    file: meow-wolf-openid-configuration.json
+  - path: /.well-known/oauth-authorization-server
+    status: 200
+    content_type: application/json; charset=utf-8
+    file: meow-wolf-openid-configuration.json
+    note: byte-identical to the openid-configuration document; stored once
+  - path: /.well-known/jwks.json
+    status: 200
+    content_type: application/json; charset=utf-8
+    file: meow-wolf-jwks.json
+  - path: /.well-known/oauth-protected-resource
+    status: 404
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+- host: https://meowwolf.com
+  platform: Webflow (webassets.meowwolf.com CDN) behind Cloudflare
+  documents:
+  - path: /.well-known/security.txt
+    status: 200
+    content_type: text/plain; charset=utf-8
+    bytes: 104
+    file: meow-wolf-security.txt
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/oauth-protected-resource
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+  - path: /.well-known/mcp.json
+    status: 404
+- host: https://tickets.meowwolf.com
+  platform: Next.js on Vercel behind Cloudflare
+  documents:
+  - path: /.well-known/security.txt
+    status: 200
+    content_type: text/plain; charset=utf-8
+    bytes: 104
+    file: meow-wolf-security.txt
+  - path: /.well-known/openid-configuration
+    status: 308
+    note: self-referential 308 (framework trailing-slash rewrite), not a document
+  - path: /.well-known/api-catalog
+    status: 308
+  - path: /.well-known/agent-card.json
+    status: 308
+  - path: /.well-known/agent.json
+    status: 308
+- host: https://shop.meowwolf.com
+  platform: WordPress + WooCommerce behind Cloudflare
+  documents:
+  - path: /.well-known/security.txt
+    status: 200
+    content_type: text/plain; charset=utf-8
+    bytes: 104
+    file: meow-wolf-security.txt
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+- host: https://credits.meowwolf.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 200
+    content_type: text/plain; charset=utf-8
+    bytes: 104
+    file: meow-wolf-security.txt
+  - path: /.well-known/agent-card.json
+    status: 308
+  - path: /.well-known/agent.json
+    status: 308
+- host: https://api.meowwolf.com
+  platform: Postman Hosted Site (CNAME phs.getpostman.com) — serves Postman's own "Not found" page
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+other_root_documents:
+- path: /robots.txt
+  host: https://meowwolf.com
+  status: 200
+  file: meow-wolf-robots.txt
+  note: >-
+    Names GPTBot, Google-Extended, ClaudeBot, PerplexityBot, CCBot and Amazonbot
+    individually and disallows only /cdn.prod/ for each — an explicit, permissive
+    AI-crawler posture rather than a blanket block.
+- path: /llms.txt
+  host: https://meowwolf.com
+  status: 200
+  file: ../llms/meow-wolf-llms.txt

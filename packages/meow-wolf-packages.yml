@@ -1,0 +1,103 @@
+generated: '2026-08-25'
+method: searched
+source: >-
+  https://registry.npmjs.org/ (scope @meowwolf), https://proxy.golang.org/ (module path
+  github.com/meowwolf/*), https://github.com/MeowWolf
+note: >-
+  Meow Wolf publishes first-party packages, but NONE of them is a client SDK for a Meow
+  Wolf API — the company operates no public API. What is published is open-source
+  infrastructure from its own show-control / installation platform (an AMQP 0-9-1 event
+  bus, Node-RED nodes for it, Go helper libraries) plus two build bundles for its own
+  Webflow website and customer portal. Because there is no API for these to wrap, this
+  artifact deliberately carries a `Packages` pointer in apis.yml and NOT an `SDKs`
+  pointer: crediting SDK ergonomics for an API that does not exist would be false.
+  Registries searched with no first-party result: PyPI, RubyGems, crates.io, NuGet,
+  Maven Central, Packagist.
+package_count: 6
+official_sdk_count: 0
+packages:
+- language: javascript
+  registry: npm
+  name: '@meowwolf/node-red-contrib-amqp'
+  url: https://www.npmjs.com/package/@meowwolf/node-red-contrib-amqp
+  install: npm install @meowwolf/node-red-contrib-amqp
+  official: true
+  version: 2.4.2
+  published: '2021-12-20'
+  first_published: '2019-11-27'
+  source_code: https://github.com/MeowWolf/node-red-contrib-amqp
+  description: AMQP input/output nodes for Node-RED, used in Meow Wolf show control.
+  note: >-
+    Last release 2021-12-20; downstream forks (@nachyn, @boovana) have since published
+    newer versions of the same codebase, so the Meow Wolf line is the stale one.
+- language: javascript
+  registry: npm
+  name: '@meowwolf/amqp-0.9.1-client'
+  url: https://www.npmjs.com/package/@meowwolf/amqp-0.9.1-client
+  install: npm install @meowwolf/amqp-0.9.1-client
+  official: true
+  version: 1.0.9
+  published: '2021-07-24'
+  first_published: '2020-12-23'
+  source_code: https://github.com/MeowWolf/amqp-0.9.1-client
+  description: >-
+    AMQP 0-9-1 broker client; package author is listed as adelbello@meowwolf.com, which
+    is the first-party evidence.
+- language: javascript
+  registry: npm
+  name: '@meowwolf/meowwolf-main'
+  url: https://www.npmjs.com/package/@meowwolf/meowwolf-main
+  install: npm install @meowwolf/meowwolf-main
+  official: true
+  version: 1.4.0
+  published: '2026-01-08'
+  first_published: '2024-09-08'
+  description: >-
+    "Meow Wolf Global code" — the build bundle for meowwolf.com itself (Finsweet
+    developer-starter template). Site code, not a client library.
+- language: javascript
+  registry: npm
+  name: '@meowwolf/mwap'
+  url: https://www.npmjs.com/package/@meowwolf/mwap
+  install: npm install @meowwolf/mwap
+  official: true
+  version: 1.2.0
+  published: '2025-12-30'
+  first_published: '2024-07-09'
+  source_code: https://github.com/MeowWolf/mwap
+  description: >-
+    Meow Wolf customer portal for viewing reservations, events, visits and account
+    information. Front-end application bundle, not a client library.
+- language: go
+  registry: go
+  name: github.com/meowwolf/eosamqp
+  url: https://pkg.go.dev/github.com/meowwolf/eosamqp
+  install: go get github.com/meowwolf/eosamqp
+  official: true
+  version: v1.0.4
+  published: '2021-04-19'
+  source_code: https://github.com/MeowWolf/eosamqp
+  description: AMQP client written in Go for the EOS show-control platform.
+- language: go
+  registry: go
+  name: github.com/meowwolf/eoslog
+  url: https://pkg.go.dev/github.com/meowwolf/eoslog
+  install: go get github.com/meowwolf/eoslog
+  official: true
+  version: v1.0.4
+  published: '2021-04-19'
+  source_code: https://github.com/MeowWolf/eoslog
+  description: Basic log formatter written in Go for the EOS platform.
+not_published:
+- name: github.com/meowwolf/eoshttp
+  registry: go
+  version: null
+  note: >-
+    Repository exists (github.com/MeowWolf/eoshttp, Go, last pushed 2021-03-11) but
+    proxy.golang.org returns an empty version list — never tagged/published as a module.
+- name: eos-python-amqp-client
+  registry: pypi
+  version: null
+  note: >-
+    Repository github.com/MeowWolf/eos-python-amqp-client exists; pypi.org/pypi/
+    returns 404. Never published to PyPI.

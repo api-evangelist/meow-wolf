@@ -1,0 +1,105 @@
+generated: '2026-08-25'
+method: probed
+source: https://auth.meowwolf.com/.well-known/openid-configuration
+note: >-
+  Meow Wolf publishes no API authentication documentation, because it publishes no API.
+  This profile is derived entirely from a live, anonymous OIDC discovery document served
+  by the company's own identity host, auth.meowwolf.com — an Auth0 custom-domain tenant
+  (CNAME meowwolf-cd-swbu1coxwcncnddi.edge.tenants.auth0.com). It was found by following
+  https://meowwolf.com/sign-in, which redirects to the ticketing app carrying
+  ?iss=https%3A%2F%2Fauth.meowwolf.com%2F. This is consumer sign-in for the ticketing
+  and customer-portal apps, NOT a developer authorization surface: no client credentials
+  are issued to third parties, no scopes beyond the standard OIDC profile/email set are
+  defined, and no API audience is documented. Recorded because it is real, callable and
+  standards-conformant, and because it is the only machine-readable contract on the
+  entire Meow Wolf estate.
+issuer: https://auth.meowwolf.com/
+provider: Auth0 (custom domain)
+security_schemes:
+- key: oidc
+  type: openIdConnect
+  openIdConnectUrl: https://auth.meowwolf.com/.well-known/openid-configuration
+  description: >-
+    OpenID Connect Discovery 1.0 document, HTTP 200 anonymous. Also served byte-identical
+    at /.well-known/oauth-authorization-server (RFC 8414).
+- key: oauth2
+  type: oauth2
+  flows:
+    authorizationCode:
+      authorizationUrl: https://auth.meowwolf.com/authorize
+      tokenUrl: https://auth.meowwolf.com/oauth/token
+      refreshUrl: https://auth.meowwolf.com/oauth/token
+    clientCredentials:
+      tokenUrl: https://auth.meowwolf.com/oauth/token
+    deviceCode:
+      deviceAuthorizationUrl: https://auth.meowwolf.com/oauth/device/code
+      tokenUrl: https://auth.meowwolf.com/oauth/token
+- key: wordpress_application_passwords
+  type: http
+  scheme: basic
+  description: >-
+    Unrelated to the above. The WooCommerce shop at shop.meowwolf.com advertises
+    WordPress application-password authorization at
+    https://shop.meowwolf.com/wp-admin/authorize-application.php, and wc/v3 returns 401
+    woocommerce_rest_cannot_view anonymously. Platform default, not a Meow Wolf program.
+endpoints:
+  authorization: https://auth.meowwolf.com/authorize
+  token: https://auth.meowwolf.com/oauth/token
+  userinfo: https://auth.meowwolf.com/userinfo
+  jwks: https://auth.meowwolf.com/.well-known/jwks.json
+  revocation: https://auth.meowwolf.com/oauth/revoke
+  registration: https://auth.meowwolf.com/oidc/register
+  device_authorization: https://auth.meowwolf.com/oauth/device/code
+  backchannel_authentication: https://auth.meowwolf.com/bc-authorize
+  mfa_challenge: https://auth.meowwolf.com/mfa/challenge
+grant_types_supported:
+- authorization_code
+- client_credentials
+- refresh_token
+- password
+- implicit
+- urn:ietf:params:oauth:grant-type:device_code
+- urn:ietf:params:oauth:grant-type:token-exchange
+- urn:ietf:params:oauth:grant-type:jwt-bearer
+- http://auth0.com/oauth/grant-type/password-realm
+- http://auth0.com/oauth/grant-type/passwordless/otp
+- http://auth0.com/oauth/grant-type/mfa-oob
+- http://auth0.com/oauth/grant-type/mfa-otp
+- http://auth0.com/oauth/grant-type/mfa-recovery-code
+token_endpoint_auth_methods_supported:
+- client_secret_basic
+- client_secret_post
+- private_key_jwt
+- none
+pkce:
+  supported: true
+  code_challenge_methods:
+  - S256
+  - plain
+dpop:
+  supported: true
+  signing_algs:
+  - ES256
+id_token_signing_alg_values_supported:
+- HS256
+- RS256
+- PS256
+jwks:
+  url: https://auth.meowwolf.com/.well-known/jwks.json
+  key_count: 2
+  algs:
+  - RS256
+observations:
+- >-
+  Dynamic client registration is enabled (/oidc/register present), which is unusual for
+  a pure consumer-login tenant and is the closest thing on the estate to a
+  self-service developer on-ramp — but it is undocumented and unadvertised.
+- >-
+  The implicit and password (ROPC) grants are both still enabled, which OAuth 2.1 and
+  the Auth0 hardening guidance both deprecate.
+- >-
+  code_challenge_methods_supported includes "plain" alongside S256; S256 only is the
+  recommended posture.
+- >-
+  Back-channel logout is supported, and global token revocation per connection is
+  exposed — a comparatively modern Auth0 tenant configuration.
