@@ -15,6 +15,17 @@ description: 'Meow Wolf is an arts-production and entertainment company founded 
   custom-domain tenant, serves a complete anonymous OpenID Connect / RFC 8414 discovery
   document and a live JWKS for consumer sign-in to the ticketing and portal apps.'
 url: https://raw.githubusercontent.com/api-evangelist/meow-wolf/refs/heads/main/apis.yml
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: false
+  label: Hosted service · you call their endpoint
+  confidence: medium
+  source:
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 image: https://webassets.meowwolf.com/cdn.prod/5dad7a19f43e6f31a9e92718/5f80a2cc5d23e71099517470_MeowWolfTreehouse.jpg
 x-type: company
 x-source: harvest:secondary-market
