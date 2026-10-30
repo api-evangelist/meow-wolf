@@ -64,5 +64,106 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Meow Wolf is a company surfaced via the API Evangelist harvest backlog (source: secondary-market) and added to the network as a stub for full-pipeline profiling.
-- https://forgeglobal.com/meow-wolf_stock/
+Meow Wolf is an arts-production and entertainment company founded in Santa Fe, New Mexico that designs and operates large-scale immersive, interactive art exhibitions — House of Eternal Return (Santa Fe), Omega Mart (Las Vegas), Convergence Station (Denver), The Real Unreal (Grapevine, TX) and Radio Tave (Houston) — with further locations announced for Los Angeles and New York City. Around the exhibitions it runs a consumer ticketing platform, an online merchandise shop, a mobile companion app for iOS and Android, an arts foundation and an education program. It is a visitor-experience business rather than a software vendor: it operates no public developer program and publishes no API reference, OpenAPI, AsyncAPI, GraphQL SDL or Postman collection. Its public engineering output is an open-source GitHub organization of show-control, beacon and AMQP messaging tooling built for its own installations. The one genuine machine-readable contract on the estate is undocumented: auth.meowwolf.com, an Auth0 custom-domain tenant, serves a complete anonymous OpenID Connect / RFC 8414 discovery document and a live JWKS for consumer sign-in to the ticketing and portal apps.
+
+**Areas:** Company · Art · Entertainment · Immersive Experiences · Event · Ticketing · Museums · Tourism · Retail · Mobile App
+
+## Meow Wolf on APIs.io
+
+Everything profiled for Meow Wolf is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/meow-wolf/](https://apis.io/providers/meow-wolf/)** — or go straight to one of the APIs or properties below.
+
+### Published properties
+
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
+
+#### Security (3)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Meow Wolf Authentication](https://apis.io/security/meow-wolf/meow-wolf-authentication/)
+- [Meow Wolf Domain Security](https://apis.io/security/meow-wolf/meow-wolf-domain-security/)
+- [Meow Wolf Vulnerability Disclosure](https://apis.io/security/meow-wolf/meow-wolf-vulnerability-disclosure/)
+
+#### OAuth scopes (1)
+
+The permissions the API asks for.
+
+- [Meow Wolf Scopes](https://apis.io/scopes/meow-wolf/meow-wolf-scopes/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Meow Wolf Plans Pricing](https://apis.io/plans/meow-wolf/meow-wolf-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Meow Wolf Rate Limits](https://apis.io/rate-limits/meow-wolf/meow-wolf-rate-limits/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://meowwolf.com/)
+- [Pricing](https://tickets.meowwolf.com/)
+- [Sign up](https://meowwolf.com/sign-in)
+- [Support](https://meowwolf.com/contact)
+- [Blog](https://meowwolf.com/blog)
+- [Terms of service](https://meowwolf.com/terms-of-use)
+- [Privacy policy](https://meowwolf.com/privacy-policy)
+- [GitHub](https://github.com/MeowWolf)
+
+## API Evangelist rating
+
+**Kin Score 25.9** — emerging · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 55.4 |
+| Contract quality | 0.0 |
+| Contract governance | 18.2 |
+| Operational transparency | 13.2 |
+| Developer ergonomics | 19.0 |
+| Access clarity | 44.7 |
+
+**Agent readiness 17.6** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | — |
+| Agentic Access | — |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | served (partial credit) |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | — |
+| Rate Limit Signal | documented (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | served (partial credit) |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | yes |
+| Agentic Commerce | — |
+
+**Regulatory alignment 40.2** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/meow-wolf/](https://apis.io/providers/meow-wolf/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Meow Wolf: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/meow-wolf/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
